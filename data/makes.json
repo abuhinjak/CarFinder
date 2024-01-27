@@ -1,0 +1,107 @@
+[
+    {
+      "name": "Alfa Romeo",
+      "logo": "https://i.imgur.com/m9Tkn05.png",
+      "image": "https://i.imgur.com/URAjtfN.jpg",
+      "id": "1",
+      "desc": "Alfa Romeo is an Italian luxury car manufacturer known for its rich history, iconic designs, and a focus on performance-oriented vehicles. Founded in 1910, Alfa Romeo has consistently combined innovative engineering with a passion for driving, delivering vehicles that embody both style and exhilaration. The brand's distinctively sleek and aggressive design language, coupled with its dedication to precision engineering, has garnered a devoted following among automotive enthusiasts worldwide."
+    },
+    {
+      "name": "Audi",
+      "logo": "https://i.imgur.com/GXjIvyO.png",
+      "image": "https://i.imgur.com/T0x7lmN.jpg",
+      "desc": "Audi embodies luxury and innovation through elegant design and advanced technology.",
+      "id": "2"
+    },
+    {
+      "name": "BMW",
+      "logo": "https://i.imgur.com/vozsqru.png",
+      "image": "https://i.imgur.com/nJxbSdz.jpg",
+      "id": "3",
+      "desc": "BMW, short for Bayerische Motoren Werke, is a renowned German automobile manufacturer and one of the most recognizable luxury car brands worldwide. Founded in 1916, BMW is celebrated for its commitment to engineering excellence, driving dynamics, and innovative design."
+    },
+    {
+      "name": "Ford",
+      "logo": "https://i.imgur.com/ZqLFfWl.png",
+      "image": "https://i.imgur.com/DKOFN83.jpg",
+      "id": "5",
+      "desc": " Pioneering Excellence in Automotive Innovation. With a storied history dating back to 1903, Ford has been at the forefront of revolutionizing the automobile industry. From the Model T that brought mobility to the masses to the cutting-edge electric and hybrid technologies of today, Ford continues to shape the way we drive and interact with vehicles."
+    },
+    {
+      "name": "Honda",
+      "logo": "https://i.imgur.com/mmR4onz.png",
+      "image": "https://i.imgur.com/wtctxMV.jpg",
+      "id": "6",
+      "desc": "Honda Motor Co., Ltd. is a prominent Japanese automaker and one of the world's largest manufacturers of motorcycles and automobiles. Founded in 1948 by Soichiro Honda, the company is known for its emphasis on engineering excellence, reliability, and innovation."
+    },
+    {
+      "name": "Hyundai",
+      "logo": "https://i.imgur.com/td2DASB.png",
+      "image": "https://i.imgur.com/LTIAwdf.jpg",
+      "id": "7",
+      "desc": "Hyundai Motor Company is a major South Korean automotive manufacturer that has gained global recognition for its affordable and reliable vehicles. Founded in 1967, Hyundai has become one of the largest automakers in the world.\n\nHyundai's vehicle lineup includes a diverse range of cars, SUVs, and trucks, known for their value proposition, quality, and innovative features."
+    },
+    {
+      "name": "Kia",
+      "logo": "https://i.imgur.com/zH9WdDN.png",
+      "image": "https://i.imgur.com/XM1PvWY.jpg",
+      "id": "8",
+      "desc": "Kia Corporation is a prominent South Korean automobile manufacturer that has gained global recognition for its quality, design, and value-focused vehicles. Established in 1944, Kia has evolved from producing bicycles and motorcycles to becoming a significant player in the automotive industry."
+    },
+    {
+      "name": "Nissan",
+      "logo": "https://i.imgur.com/JgYWD4L.png",
+      "image": "https://i.imgur.com/bebIJbJ.jpg",
+      "id": "9",
+      "desc": "Nissan Motor Corporation is a prominent Japanese automaker known for its wide range of vehicles and innovative technologies. Founded in 1933, Nissan has become a global player in the automotive industry."
+    },
+    {
+      "name": "Mercedes-Benz",
+      "logo": "https://i.imgur.com/jVUUftN.png",
+      "image": "https://i.imgur.com/PLI6Hjv.jpg",
+      "id": "10",
+      "desc": "Mercedes-Benz is a prestigious German automobile manufacturer renowned for its luxury vehicles, innovative technologies, and commitment to engineering excellence. Founded in 1926, Mercedes-Benz has become synonymous with luxury and high-performance cars."
+    },
+    {
+      "name": "Opel",
+      "logo": "https://i.imgur.com/ZfaZgfs.png",
+      "image": "https://i.imgur.com/NGVL1z9.jpg",
+      "id": "11",
+      "desc": "Opel is a historic German automobile manufacturer known for producing a range of practical and efficient vehicles that cater to diverse customer needs in the European market."
+    },
+    {
+      "name": "Renault",
+      "logo": "https://i.imgur.com/lwyctdq.png",
+      "image": "https://i.imgur.com/T0x7lmN.jpg",
+      "id": "12",
+      "desc": "Renault, a French automaker with a legacy dating back to 1899, offers a wide array of vehicles including cars, vans, and electric models, embodying innovation and accessibility, with standout options like the Renault Clio and Renault Megane renowned for their style and practicality."
+    },
+    {
+      "name": "Seat",
+      "logo": "https://i.imgur.com/o7RNDHl.png",
+      "image": "https://i.imgur.com/ih4b3ja.jpg",
+      "id": "13",
+      "desc": "SEAT is a Spanish automobile manufacturer known for producing stylish and affordable vehicles. Established in 1950, SEAT offers a range of cars, from compact cars to SUVs, with a focus on design and driving enjoyment. The brand's models, like the SEAT Ibiza and SEAT Leon, are recognized for their dynamic styling and value proposition."
+    },
+    {
+      "name": "Škoda",
+      "logo": "https://i.imgur.com/wHGiNuf.png",
+      "image": "https://i.imgur.com/ihdslhM.jpg",
+      "id": "14",
+      "desc": "ŠKODA AUTO is a Czech automobile manufacturer known for producing a range of vehicles with practicality and value in mind. Established in 1895, ŠKODA offers a lineup of cars and SUVs, focusing on quality, innovation, and affordability. The brand's models, such as the ŠKODA Octavia and ŠKODA Kodiaq, are recognized for their spaciousness and features."
+    },
+    {
+      "name": "Volvo",
+      "logo": "https://i.imgur.com/VTcWLRO.png",
+      "image": "https://i.imgur.com/mhcyBiR.jpg",
+      "id": "15",
+      "desc": "Volvo Cars is a Swedish automobile manufacturer renowned for its commitment to safety, innovation, and luxury. Founded in 1927, Volvo produces a range of vehicles known for their modern design and advanced technology."
+    },
+    {
+      "name": "Volkswagen",
+      "logo": "https://i.imgur.com/CB8pIk7.png",
+      "image": "https://i.imgur.com/T0x7lmN.jpg",
+      "id": "16",
+      "desc": "Volkswagen (VW) is a prominent German automobile manufacturer known for its wide range of vehicles and iconic models. Established in 1937, Volkswagen offers cars, SUVs, and electric vehicles, focusing on quality engineering and innovative technology. The brand's models, such as the Volkswagen Golf and Volkswagen Passat, are recognized for their performance, safety, and driving experience."
+    }
+  ]
