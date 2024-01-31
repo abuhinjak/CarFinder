@@ -1,9 +1,15 @@
 import { makeAutoObservable } from "mobx";
+import { makePersistable } from "mobx-persist-store";
 import CarsService from "../services/CarsService";
 
 class CarsStore {
     carsData = {
         makes: [],
+        limit: 8,
+        page: 1
+    };
+    modelsData = {
+        models: [],
         limit: 8,
         page: 1
     };
@@ -16,6 +22,12 @@ class CarsStore {
     constructor() {
         makeAutoObservable(this);
         this.carsService = new CarsService();
+
+        makePersistable(this, {
+            name: "CarsStore",
+            properties: ["carsData", "modelsData", "status"],
+            storage: window.sessionStorage        
+        })
     }
 
     *fetchCars() {
@@ -26,8 +38,24 @@ class CarsStore {
                 page: this.carsData.page
             }
             const urlParams = new URLSearchParams(Object.entries(params));
-            const cars = yield this.carsService.get(urlParams);
+            const cars = yield this.carsService.getMakes(urlParams);
             this.carsData.makes = cars;
+            this.status = "success";
+        } catch (error) {
+            this.status = "error";
+        }
+    }
+
+    *fetchModels(id) {
+        this.status = "loading";
+        try {
+            var params = {
+                limit: this.modelsData.limit,
+                page: this.modelsData.page
+            }
+            const urlParams = new URLSearchParams(Object.entries(params));
+            const models = yield this.carsService.getModels(id, urlParams);
+            this.modelsData.models = models;
             this.status = "success";
         } catch (error) {
             this.status = "error";
@@ -36,7 +64,7 @@ class CarsStore {
 
     *deleteMake(id) {
         try {
-            const response = yield this.carsService.delete(id);
+            const response = yield this.carsService.deleteMake(id);
             if(response.ok) {
                 yield this.fetchCars();
                 this.status = "success";
@@ -45,10 +73,6 @@ class CarsStore {
             console.log(error);
             this.status = "error";
         }
-    }
-
-    get total() {
-        return this.carsData.makes.length;
     }
 }
 
