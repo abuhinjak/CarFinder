@@ -9,6 +9,7 @@ const HomeScreen = observer(() => {
     carsStore.fetchCars(); 
   }, []);
 
+
   return (
     <>
       <ul>

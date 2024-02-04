@@ -20,6 +20,16 @@ class CarsService {
         return response.json();
     }
 
+    editModel = async (data, makesID, modelID) => {
+        const options = {
+            method: "PUT",
+            body: JSON.stringify(data, makesID, modelID),
+        }
+        const request = new Request(`${API_URL}/makes/${makesID}/models/${modelID}`, options);
+        const response = await fetch(request);
+        return response;
+    }
+
     deleteMake = async (id) => {
         const options = {
             method: "DELETE",

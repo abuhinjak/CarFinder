@@ -10,8 +10,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
       <Route path='/' element={<HomeScreen />} />
-      <Route path='/makes/:id' element={<Make />} />
-      <Route path='/model/:id' element={<Model />} />
+      <Route path='makes/:id' element={<Make />} />
+      <Route path='model/:id' element={<Model />} />
     </Route>
   )
 )
