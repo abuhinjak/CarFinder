@@ -7,9 +7,13 @@ const Form = observer(({ modalTrigger, showModal, model }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        carsStore.editModelData({ data: modelName, modelID: model.id, makesID: model.makeId });
+        const data = {
+            name: modelName
+        }
+        carsStore.editModelData(data, model.makeId, model.id);
         modalTrigger();
     };
+    
 
     const handleSave = () => {
         // Implement save functionality here if needed

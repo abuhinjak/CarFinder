@@ -21,14 +21,28 @@ class CarsService {
     }
 
     editModel = async (data, makesID, modelID) => {
-        const options = {
-            method: "PUT",
-            body: JSON.stringify(data, makesID, modelID),
+        try {
+            const options = {
+                method: "PUT",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            };
+            const request = new Request(`${API_URL}/makes/${makesID}/models/${modelID}`, options);
+            const response = await fetch(request);
+            console.log(request)
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            return response;
+        } catch (error) {
+            console.error('Error:', error);
+            throw error; 
         }
-        const request = new Request(`${API_URL}/makes/${makesID}/models/${modelID}`, options);
-        const response = await fetch(request);
-        return response;
-    }
+    };
 
     deleteMake = async (id) => {
         const options = {

@@ -62,13 +62,13 @@ class CarsStore {
         }
     }
 
-    *editModelData(data, modelID, makesID) {
+    *editModelData(data, makesID, modelID ) {
         try {
             const response = yield this.carsService.editModel(data, makesID, modelID);
             if(response.ok) {
-                // yield this.fetchCars();
+                // yield this.fetchModels(modelID);
                 this.status = "success";
-                console.log(data)
+                console.log('success')
             } 
         } catch (error) {
             console.log(error);
