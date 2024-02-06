@@ -14,6 +14,10 @@ class CarsStore {
         page: 1
     };
     status = "";
+    modals = {
+        createModal: false,
+        editModal: false
+    };
 
     get isLoading() {
         return this.status === "loading";
@@ -30,6 +34,37 @@ class CarsStore {
         })
     }
 
+    // // Dodajte event listener samo ako je modal otvoren
+    // if (this.modals.createModal) {
+    //     // Postavite event listener koji će zatvoriti modal kada se klikne izvan njega
+    //     document.addEventListener('click', handleClickOutsideModal);
+    // } else {
+    //     // Uklonite event listener kada je modal zatvoren
+    //     document.removeEventListener('click', handleClickOutsideModal);
+    // }
+
+    // const handleClickOutsideModal = (event) => {
+    //     const modal = document.getElementById('editForm'); // Zamijenite 'yourModalId' s ID-om vašeg moda
+    //     if (modal && !modal.contains(event.target)) {
+    //         // Klik je izvan moda, pa zatvorite modal
+    //         this.createModalTrigger();
+    //     }
+    // }
+
+    // createModalTrigger() {
+    //     if (this.modals.editModal) {
+    //         this.modals.editModal = false;
+    //     }
+    //     this.modals.createModal = !this.modals.createModal;
+    // }
+
+    // editModalTrigger() {
+    //     if(this.modals.createModal) {
+    //         this.modals.createModal = false;
+    //     }
+    //     this.modals.editModal = !this.modals.editModal;
+    // }
+
     *fetchCars() {
         this.status = "loading";
         try {
@@ -38,10 +73,25 @@ class CarsStore {
                 page: this.carsData.page
             }
             const urlParams = new URLSearchParams(Object.entries(params));
-            const cars = yield this.carsService.getMakes(urlParams);
+            const cars = yield this.carsService.getAllMakes(urlParams);
             this.carsData.makes = cars;
-            this.status = "success";
+            this.status = "pending";
         } catch (error) {
+            this.status = "error";
+        } finally {
+            this.status = "success";
+        }
+    }
+
+    *deleteMake(id) {
+        try {
+            const response = yield this.carsService.deleteMake(id);
+            if(response.ok) {
+                yield this.fetchCars();
+                this.status = "success";
+            } 
+        } catch (error) {
+            console.log(error);
             this.status = "error";
         }
     }
@@ -56,9 +106,11 @@ class CarsStore {
             const urlParams = new URLSearchParams(Object.entries(params));
             const models = yield this.carsService.getModels(id, urlParams);
             this.modelsData.models = models;
-            this.status = "success";
+            this.status = "pending";
         } catch (error) {
             this.status = "error";
+        } finally {
+            this.status = "success";
         }
     }
 
@@ -66,21 +118,7 @@ class CarsStore {
         try {
             const response = yield this.carsService.editModel(data, makesID, modelID);
             if(response.ok) {
-                // yield this.fetchModels(modelID);
-                this.status = "success";
-                console.log('success')
-            } 
-        } catch (error) {
-            console.log(error);
-            this.status = "error";
-        }
-    }
-
-    *deleteMake(id) {
-        try {
-            const response = yield this.carsService.deleteMake(id);
-            if(response.ok) {
-                yield this.fetchCars();
+                yield this.fetchModels(makesID);
                 this.status = "success";
             } 
         } catch (error) {
