@@ -1,7 +1,7 @@
 
-const FormCreate = ({ open }) => {
+const FormCreate = () => {
   return (
-    <div className={open ? 'show' : 'hide'}>
+    <div>
       Create
     </div>
   )

@@ -11,6 +11,29 @@ class CarsService {
         return response.json();
     }
 
+    editMake = async (data, id) => {
+        try {
+            const headers = new Headers();
+            headers.append("Content-Type", "application/json");
+            const options = {
+                method: "PUT",
+                headers,
+                body: JSON.stringify(data)
+            }
+            const request = new Request(`${API_URL}/makes/${id}`, options);
+            const response = await fetch(request);
+            if(!response.ok) {
+                throw new Error(response.status);
+            }
+            return response;            
+        } catch (error) {
+            console.log(error);
+        } finally {
+            this.status = "success";
+        }
+
+    }
+
     deleteMake = async (id) => {
         const headers = new Headers();
         headers.append("Content-Type", "application/json");
@@ -53,6 +76,8 @@ class CarsService {
         } catch (error) {
             console.error('Error:', error);
             throw error; 
+        } finally {
+            this.status = "success";
         }
     };
 

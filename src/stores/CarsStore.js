@@ -83,6 +83,19 @@ class CarsStore {
         }
     }
 
+    *editMakeData(data, id) {
+        try {
+            const response = yield this.carsService.editMake(data, id);
+            if(response.ok) {
+                yield this.fetchCars();
+                this.status = "success";
+            } 
+        } catch (error) {
+            console.log(error);
+            this.status = "error";
+        }
+    }
+
     *deleteMake(id) {
         try {
             const response = yield this.carsService.deleteMake(id);
