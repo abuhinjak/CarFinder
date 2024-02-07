@@ -31,7 +31,28 @@ class CarsService {
         } finally {
             this.status = "success";
         }
+    }
 
+    newMake = async (data) => {
+        try {
+            const headers = new Headers();
+            headers.append("Content-Type", "application/json");
+            const options = {
+                method: "POST",
+                headers,
+                body: JSON.stringify(data)
+            }
+            const request = new Request(`${API_URL}/makes`, options);
+            const response = await fetch(request);
+            if(!response.ok) {
+                throw new Error(response.status);
+            }
+            return response;            
+        } catch (error) {
+            console.log(error);
+        } finally {
+            this.status = "success";
+        }
     }
 
     deleteMake = async (id) => {

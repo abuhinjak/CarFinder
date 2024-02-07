@@ -65,12 +65,22 @@ class CarsStore {
     //     this.modals.editModal = !this.modals.editModal;
     // }
 
-    *fetchCars() {
+    nextPage() {
+        this.carsData.page++;
+        this.fetchCars();
+    }
+
+    firstPage() {
+        this.carsData.page = 1;
+        this.fetchCars();
+    }
+
+    *fetchCars(page) {
         this.status = "loading";
         try {
             var params = {
                 limit: this.carsData.limit,
-                page: this.carsData.page
+                page: page ? page : this.carsData.page
             }
             const urlParams = new URLSearchParams(Object.entries(params));
             const cars = yield this.carsService.getAllMakes(urlParams);
@@ -80,6 +90,19 @@ class CarsStore {
             this.status = "error";
         } finally {
             this.status = "success";
+        }
+    }
+
+    *createNewMake(data) {
+        try {
+            const response = yield this.carsService.newMake(data);
+            if(response.ok) {
+                yield this.fetchCars();
+                this.status = "success";
+            } 
+        } catch (error) {
+            console.log(error);
+            this.status = "error";
         }
     }
 

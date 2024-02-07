@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { carsStore } from "../stores/CarsStore";
 import { useEffect, useState } from "react";
 
-import FormCreate from "../components/FormCreate";
+import NewMakeForm from "../components/NewMakeForm";
 import EditMakeForm from "../components/EditMakeForm";
 
 
@@ -38,7 +38,7 @@ const Make = observer(() => {
                     <Link to={`/model/${model.id}`}><button>GO</button></Link>
                 </div>
             ))}
-            {createModal && <FormCreate open={createModal} />}
+            {createModal && <NewMakeForm open={createModal} />}
             {editModal && <EditMakeForm open={editModalTrigger} make={make} id={makeID} />}
         </div>
     );

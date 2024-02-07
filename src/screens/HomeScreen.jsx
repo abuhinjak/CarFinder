@@ -6,7 +6,7 @@ import { carsStore } from '../stores/CarsStore';
 const HomeScreen = observer(() => {
 
   useEffect(() => {
-    carsStore.fetchCars(); 
+    carsStore.fetchCars();
   }, []);
 
 
@@ -25,6 +25,10 @@ const HomeScreen = observer(() => {
           </li>
         ))}
       </ul>
+      <div className="navigation">
+        <button onClick={() => carsStore.firstPage()}>First Page</button>
+        {carsStore.carsData.makes.length === carsStore.carsData.limit && <button onClick={() => carsStore.nextPage()}>Next Page</button>}
+      </div>
     </>
   );  
 });
