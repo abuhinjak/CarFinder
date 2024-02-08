@@ -78,6 +78,28 @@ class CarsService {
         return response.json();
     }
 
+    newModel = async (data, makesID) => {
+        try {
+            const headers = new Headers();
+            headers.append("Content-Type", "application/json");
+            const options = {
+                method: "POST",
+                headers,
+                body: JSON.stringify(data)
+            }
+            const request = new Request(`${API_URL}/makes/${makesID}/models`, options);
+            const response = await fetch(request);
+            if(!response.ok) {
+                throw new Error(response.status);
+            }
+            return response;            
+        } catch (error) {
+            console.log(error);
+        } finally {
+            this.status = "success";
+        }
+    }
+
     editModel = async (data, makesID, modelID) => {
         try {
             const headers = new Headers();
@@ -101,6 +123,18 @@ class CarsService {
             this.status = "success";
         }
     };
+
+    deleteModel = async (makeID, modelID) => {
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        const options = {
+            method: "DELETE",
+            headers
+        }
+        const request = new Request(`${API_URL}/makes/${makeID}/models/${modelID}`, options);
+        const response = await fetch(request);
+        return response;
+    }
 
 
 }

@@ -3,28 +3,28 @@ import { useParams, Link } from "react-router-dom";
 import { carsStore } from "../stores/CarsStore";
 import { useEffect, useState } from "react";
 
-import NewMakeForm from "../components/NewMakeForm";
 import EditMakeForm from "../components/EditMakeForm";
+import NewModelForm from "../components/NewModelForm";
 
 
 const Make = observer(() => {
     const makeID = useParams().id;
     const make = carsStore.carsData.makes.find((make) => make.id === makeID);
-    const [createModal, setCreateModal] = useState(false);
     const [editModal, setEditModal] = useState(false);
+    const [createModal, setCreateModal] = useState(false);
 
-    const createModalTrigger = () => {
-        setCreateModal((prevState) => !prevState);
-    }
+    useEffect(() => {
+        carsStore.fetchModels(makeID);
+    }, [makeID]);
+
 
     const editModalTrigger = () => {
         setEditModal((prevState) => !prevState);
     }
 
-
-    useEffect(() => {
-        carsStore.fetchModels(makeID);
-    }, [makeID]);
+    const createModalTrigger = () => {
+        setCreateModal((prevState) => !prevState);
+    }
 
     return (
         <div>
@@ -36,10 +36,12 @@ const Make = observer(() => {
                 <div key={model.id}>
                     {model.name}
                     <Link to={`/model/${model.id}`}><button>GO</button></Link>
+                    <button onClick={() => carsStore.deleteModel(makeID, model.id)}>Delete</button>
                 </div>
             ))}
-            {createModal && <NewMakeForm open={createModal} />}
             {editModal && <EditMakeForm open={editModalTrigger} make={make} id={makeID} />}
+            {createModal && <NewModelForm open={createModal} makeID={makeID} close={createModalTrigger} />}
+
         </div>
     );
 });

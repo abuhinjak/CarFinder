@@ -150,11 +150,37 @@ class CarsStore {
         }
     }
 
+    *createNewModel(data, makesID) {
+        try {
+            const response = yield this.carsService.newModel(data, makesID);
+            if(response.ok) {
+                yield this.fetchModels(makesID);
+                this.status = "success";
+            } 
+        } catch (error) {
+            console.log(error);
+            this.status = "error";
+        }
+    }
+
     *editModelData(data, makesID, modelID ) {
         try {
             const response = yield this.carsService.editModel(data, makesID, modelID);
             if(response.ok) {
                 yield this.fetchModels(makesID);
+                this.status = "success";
+            } 
+        } catch (error) {
+            console.log(error);
+            this.status = "error";
+        }
+    }
+
+    *deleteModel(makeID, modelID) {
+        try {
+            const response = yield this.carsService.deleteModel(makeID, modelID);
+            if(response.ok) {
+                yield this.fetchModels(makeID);
                 this.status = "success";
             } 
         } catch (error) {

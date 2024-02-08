@@ -9,11 +9,13 @@ const Model = observer(() => {
     const model = carsStore.modelsData.models.find((model) => model.id === modelID);
     const [editModal, setEditModal] = useState(false);
 
+
     const navigate = useNavigate();
 
     const editModalTrigger = () => {
         setEditModal((prevState) => !prevState);
     }
+    
 
     return (
         <div>
@@ -22,6 +24,8 @@ const Model = observer(() => {
             <button onClick={editModalTrigger}>Edit</button>
             {editModal && <Form model={model} open={editModalTrigger} />}
         </div>
+
+
     );
 });
 
