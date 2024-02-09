@@ -23,6 +23,7 @@ const NewMakeForm = observer(({ open, close, makeID }) => {
                 <label htmlFor="desc">Desc</label>
                 <textarea name="desc" id="desc"></textarea>
                 <button type="submit">Create</button>
+                <button type="button" onClick={close}>Close</button>
             </form>
         </div>
     )

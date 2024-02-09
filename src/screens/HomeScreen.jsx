@@ -15,17 +15,24 @@ const HomeScreen = observer(() => {
 
   const createModalTrigger = () => {
     setCreateModal((prevState) => !prevState);
-}
-
+  }
 
   return (
     <>
      <button onClick={createModalTrigger}>New Make</button>
 
-      <ul>
+     <div>
+      <button onClick={() => carsStore.sortMakes('asc')}>Sort ASC</button>
+      <button onClick={() => carsStore.sortMakes('desc')}>Sort DESC</button>
+     </div>
+
+      <ul style={{display: "flex", flexWrap: "wrap", gap:"30px"}}>
         {carsStore.carsData.makes.map((make) => ( 
           <li key={make.id}>
-            {make.name} 
+            <h2>{make.name}</h2>
+            <div>
+              <img src={make.image} alt={make.name} width={300} height={200} style={{objectFit: "cover"}}/>
+            </div> 
             <button onClick={() => carsStore.deleteMake(make.id)}>
                 Delete
             </button>

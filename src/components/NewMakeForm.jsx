@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { carsStore } from '../stores/CarsStore'
 import { useNavigate } from 'react-router-dom'
 
-const NewMakeForm = observer(({ open }) => {
+const NewMakeForm = observer(({ open, close }) => {
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -25,6 +25,7 @@ const NewMakeForm = observer(({ open }) => {
                 <label htmlFor="desc">Desc</label>
                 <textarea name="desc" id="desc"></textarea>
                 <button type="submit">Create</button>
+                <button type="button" onClick={close}>Close</button>
             </form>
         </div>
     )

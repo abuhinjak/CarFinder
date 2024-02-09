@@ -6,7 +6,9 @@ class CarsStore {
     carsData = {
         makes: [],
         limit: 8,
-        page: 1
+        page: 1,
+        sortBy: 'name',
+        order: 'asc'
     };
     modelsData = {
         models: [],
@@ -75,15 +77,23 @@ class CarsStore {
         this.fetchCars();
     }
 
-    *fetchCars(page) {
+    sortMakes(order) {
+        this.carsData.order = order;
+        this.fetchCars();
+    }
+
+    *fetchCars() {
         this.status = "loading";
+        const params = {
+            limit: this.carsData.limit,
+            page: this.carsData.page,
+            sortBy: this.carsData.sortBy,
+            order: this.carsData.order
+        }
         try {
-            var params = {
-                limit: this.carsData.limit,
-                page: page ? page : this.carsData.page
-            }
             const urlParams = new URLSearchParams(Object.entries(params));
             const cars = yield this.carsService.getAllMakes(urlParams);
+            console.log(cars)
             this.carsData.makes = cars;
             this.status = "pending";
         } catch (error) {
