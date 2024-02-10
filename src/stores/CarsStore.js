@@ -93,9 +93,7 @@ class CarsStore {
         try {
             const urlParams = new URLSearchParams(Object.entries(params));
             const cars = yield this.carsService.getAllMakes(urlParams);
-            console.log(cars)
             this.carsData.makes = cars;
-            this.status = "pending";
         } catch (error) {
             this.status = "error";
         } finally {
@@ -109,7 +107,7 @@ class CarsStore {
             if(response.ok) {
                 yield this.fetchCars();
                 this.status = "success";
-            } 
+            }
         } catch (error) {
             console.log(error);
             this.status = "error";

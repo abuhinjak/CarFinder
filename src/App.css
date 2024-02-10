@@ -1,3 +1,39 @@
+
+:root {
+    /* Colors */
+    --primary: #08D9D6;
+    --secondary: #FF2E63;
+    --dark: #252A34;
+    --light: #EAEAEA;
+
+    /* Font */
+    --font-family: 'Kanit', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+}
+
+img {
+    width: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* Utils */
 .show {
     display: block;
 }
@@ -5,3 +41,9 @@
 .hide {
     display: none;
 }
+
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+

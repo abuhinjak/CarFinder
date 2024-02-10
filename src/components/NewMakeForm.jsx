@@ -9,7 +9,8 @@ const NewMakeForm = observer(({ open, close }) => {
         e.preventDefault();
         const data = {
             name: e.target.name.value,
-            desc: e.target.desc.value
+            desc: e.target.desc.value,
+            image: 'https://source.unsplash.com/random/300×300?car'
         }
         carsStore.createNewMake(data);
         navigate('/')
