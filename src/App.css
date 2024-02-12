@@ -8,6 +8,9 @@
 
     /* Font */
     --font-family: 'Kanit', sans-serif;
+
+    /* Transitions */
+    --transition-color: color .3s ease;
 }
 
 * {
@@ -43,7 +46,131 @@ a {
 }
 
 .container {
-    max-width: 1024px;
+    max-width: 1220px;
     margin: 0 auto;
 }
 
+.color-primary {
+    color: var(--primary);
+}
+
+/* Buttons */
+.btn {
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    font-family: var(--font-family);
+    cursor: pointer;
+}
+
+.primary-btn {
+    background-color: var(--primary);
+    color: var(--light);
+}
+
+.secondary-btn {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+.light-btn {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+.delete-btn {
+    background-color: var(--secondary);
+    color: var(--light);
+}
+
+.sorting-btn {
+    padding: 6px 16px 4px;
+    border: 1px solid var(--light);
+}
+
+.sorting-btn.active {
+    background-color: var(--primary);
+}
+
+.sorting-btn.up {
+    border-radius: 0px 16px 16px 0;
+    border-left: none;
+}
+
+.sorting-btn.down {
+    border-radius: 16px 0px 0px 16px;
+    border-right: none;
+}
+
+
+
+/* 
+    _____#Header_____
+*/
+
+.header {
+    background-color: var(--dark);
+    padding: 1rem 0;
+    color: var(--light);
+}
+
+.header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header nav .logo a {
+    color: var(--light);
+}
+
+.header nav .logo span {
+    color: var(--primary);
+}
+
+.header nav ul {
+    display: flex;
+    gap: 3rem;
+}
+
+.header nav ul li a {
+    color: var(--light);
+    transition: var(--transition-color);
+}
+
+.header nav ul li a:hover {
+    color: var(--primary);
+}
+
+
+
+/* 
+    _____#Main_____
+*/
+
+.showcase-title {
+    margin: 3rem auto;
+    text-align: center;
+}
+
+.main-container-buttons-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.buttons-wrapper,
+.sorting,
+.view {
+    display: flex;
+    align-items: center;
+}
+
+.buttons-wrapper {
+    gap: 1rem;
+}
+
+.buttons-wrapper span {
+    margin-right: 0.5rem;
+}
