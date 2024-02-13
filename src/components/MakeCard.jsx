@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const MakeCard = ({ make, view }) => {
     const navigate = useNavigate();
@@ -16,12 +17,23 @@ const MakeCard = ({ make, view }) => {
                         {
                             view === 'list' && <p>{make.desc}</p>
                         }
-                        <button onClick={() => navigate(`/makes/${make.id}`)} className='btn secondary-btn'>View</button>
+                        <button onClick={() => navigate(`/makes/${make.id}`)} className='btn outline-btn'>Check Models</button>
                     </div>
                 </div>
             </div>
         </Link>
     );
+};
+
+MakeCard.propTypes = {
+    make: PropTypes.shape({
+        id: PropTypes.string,
+        image: PropTypes.string.isRequired,
+        logo: PropTypes.string,
+        name: PropTypes.string.isRequired,
+        desc: PropTypes.string
+    }).isRequired,
+    view: PropTypes.string.isRequired
 };
 
 export default MakeCard;

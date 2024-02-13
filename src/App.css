@@ -1,16 +1,19 @@
 
 :root {
     /* Colors */
-    --primary: #08D9D6;
-    --secondary: #FF2E63;
-    --dark: #252A34;
-    --light: #EAEAEA;
+    --primary-clr: #08D9D6;
+    --light-primary-clr: #B2F7F5;
+    --secondary-clr: #FF2E63;
+    --dark-clr: #252A34;
+    --light-dark-clr: #333C4E;
+    --light-clr: #EAEAEA;
 
     /* Font */
     --font-family: 'Kanit', sans-serif;
 
     /* Transitions */
     --transition-color: color .3s ease;
+    --transition-background: background-color .3s ease;
 }
 
 * {
@@ -51,7 +54,7 @@ a {
 }
 
 .color-primary {
-    color: var(--primary);
+    color: var(--primary-clr);
 }
 
 /* Buttons */
@@ -61,36 +64,76 @@ a {
     border-radius: 5px;
     font-family: var(--font-family);
     cursor: pointer;
+    transition: var(--transition-background),
+                var(--transition-color);
+}
+
+.outline-btn {
+    position: relative;
+    background-color: transparent;
+    padding: 0;
+}
+
+.outline-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    right: 0;
+    width: 70%;
+    height: 1px;
+    background-color: var(--dark-clr);
+    transition: width .3s ease;
+}
+
+.outline-btn:hover::after {
+    width: 100%;
 }
 
 .primary-btn {
-    background-color: var(--primary);
+    background-color: var(--primary-clr);
     color: var(--light);
+}
+
+.primary-btn:hover {
+    background-color: var(--light-primary-clr);
 }
 
 .secondary-btn {
-    background-color: var(--dark);
-    color: var(--light);
+    background-color: var(--dark-clr);
+    color: var(--light-clr);
+}
+
+.secondary-btn:hover {
+    background-color: var(--light-dark-clr);
 }
 
 .light-btn {
-    background-color: var(--light);
-    color: var(--dark);
+    background-color: var(--light-clr);
+    color: var(--dark-clr);
 }
 
 .delete-btn {
-    background-color: var(--secondary);
-    color: var(--light);
+    background-color: var(--secondary-clr);
+    color: #fff;
+}
+
+.delete-btn:hover {
+    background-color: var(--dark-clr);
 }
 
 .sorting-btn {
     padding: 6px 16px 4px;
-    border: 1px solid var(--light);
+    border: 1px solid var(--light-clr);
     cursor: pointer;
+    transition: var(--transition-background);
+}
+
+.sorting-btn:hover {
+    background-color: var(--light-clr);
 }
 
 .sorting-btn.active {
-    background-color: var(--primary);
+    background-color: var(--primary-clr);
 }
 
 .sorting-btn.up {
@@ -103,6 +146,29 @@ a {
     border-right: none;
 }
 
+.search-btn,
+.reset-btn {
+    position: absolute;
+    top: 4px;
+    left: 5px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.reset-btn {
+    right: 10px;
+    left: unset;
+}
+
+.search-btn svg,
+.reset-btn svg {
+    font-size: 23px;
+    color: var(--dark-clr);
+}
+
+
+
 /* 
     _____#Pagination_____
 */
@@ -114,15 +180,34 @@ a {
 }
 
 
+/* 
+    _____#Search Input_____
+*/
+.search-field {
+    position: relative;
+}
+
+.search-field input {
+    padding: .5rem 1rem .5rem 2rem;
+    border-radius: 20px;
+    border: none;
+    font-size: var(--font-family);
+    font-size: .9rem;
+}
+
+.search-field input:focus {
+    outline: none;
+}
+
 
 /* 
     _____#Header_____
 */
 
 .header {
-    background-color: var(--dark);
+    background-color: var(--dark-clr);
     padding: 1rem 0;
-    color: var(--light);
+    color: var(--light-clr);
 }
 
 .header nav {
@@ -132,11 +217,12 @@ a {
 }
 
 .header nav .logo a {
-    color: var(--light);
+    color: var(--light-clr);
+    font-size: 1.3rem;
 }
 
 .header nav .logo span {
-    color: var(--primary);
+    color: var(--primary-clr);
 }
 
 .header nav ul {
@@ -145,12 +231,12 @@ a {
 }
 
 .header nav ul li a {
-    color: var(--light);
+    color: var(--light-clr);
     transition: var(--transition-color);
 }
 
 .header nav ul li a:hover {
-    color: var(--primary);
+    color: var(--primary-clr);
 }
 
 
@@ -161,10 +247,11 @@ a {
 
 main.container {
     margin-bottom: 3rem;
+    min-height: calc(100vh - 10rem);
 }
 
 .showcase-title {
-    margin: 3rem auto;
+    margin: 1rem auto;
     text-align: center;
 }
 
@@ -203,6 +290,7 @@ main.container {
 
 .cards-grid .make-card {
     position: relative;
+    max-width: 250px;
     max-height: 20rem;
     border-radius: 5px;
     transition: var(--transition-color);
@@ -221,24 +309,23 @@ main.container {
     align-items: center;
     justify-content: flex-end;
     padding: 0.5rem 1rem 1rem;
-    background-color: var(--light);
+    background-color: var(--light-clr);
 }
 
 .cards-grid .make-info-wrapper .make-logo {
     position: absolute;
-    top: -3rem;
+    top: 0rem;
     left: 0;
-    height: 100px;
-    width: 100px;
-    padding: 0 0.2rem;
-    background-color: var(--light);
+    height: 100%;
+    width: 110px;
+    padding: 0 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .cards-grid .make-info-wrapper .make-name {
-    color: var(--dark);
+    color: var(--dark-clr);
     text-align: end;
 }
 
@@ -254,33 +341,47 @@ main.container {
 }
 
 .cards-list .make-card {
-    position: relative;
     display: flex;
-    background-color: var(--light);
+    background-color: var(--light-clr);
 }
 
 .cards-list .make-card > img {
-    height: 200px;
+    height: 250px;
     width: 200px;
     -o-object-fit: cover;
        object-fit: cover;
 }
 
 .cards-list .make-info-wrapper .make-logo {
-    position: absolute;
     width: 70px;
-    background-color: var(--light);
-    left: 130px;
-    top: 0;
+    background-color: transparent;
 }
 
 .cards-list .make-info-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding: 1rem;
 }
 
 .cards-list .make-info-wrapper p {
     margin-bottom: 1rem;
+}
+
+/* 
+    _____#Footer_____
+*/
+
+footer {
+    background-color: var(--dark-clr);
+    color: var(--light-clr);
+    padding: .5rem;
+}
+
+footer p {
+    text-align: center;
+    font-size: .75rem;
+}
+
+footer p span {
+    color: var(--primary-clr);
 }

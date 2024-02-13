@@ -82,13 +82,14 @@ class CarsStore {
         this.fetchCars();
     }
 
-    *fetchCars() {
+    *fetchCars(search) {
         this.status = "loading";
         const params = {
             limit: this.carsData.limit,
             page: this.carsData.page,
             sortBy: this.carsData.sortBy,
-            order: this.carsData.order
+            order: this.carsData.order,
+            search: search ? search : ''
         }
         try {
             const urlParams = new URLSearchParams(Object.entries(params));

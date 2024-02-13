@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import SearchInput from './SearchInput';
 
 const Header = () => {
     return (
@@ -11,7 +12,7 @@ const Header = () => {
                 {
                 useLocation().pathname !== "/" && <li><Link to={'/'}>Home</Link></li>
                 }
-                <input className='search' type="text" name="Search" id="search" placeholder='Search' />
+                <SearchInput />
             </ul>
         </nav>
         </header>

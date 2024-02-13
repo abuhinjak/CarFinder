@@ -39,16 +39,20 @@ const HomeScreen = observer(() => {
                       <MakeCard key={make.id} make={make} view={view} />)
                   }
                 </div>
-                <div className="pagination">
-                  {
-                    carsStore.carsData.page !== 1 && <button className="btn light-btn" onClick={() => carsStore.firstPage()}>Prev</button>
-                  }
+              {
+                carsStore.status === "success" && (
+                  <div className="pagination">
+                    {
+                      carsStore.carsData.page !== 1 && <button className="btn light-btn" onClick={() => carsStore.firstPage()}>Prev</button>
+                    }
 
-                  {
-                    carsStore.carsData.makes.length === carsStore.carsData.limit && 
-                    <button className="btn secondary-btn" onClick={() => carsStore.nextPage()}>Next</button>
-                  }
-                </div>
+                    {
+                      carsStore.carsData.makes.length === carsStore.carsData.limit && 
+                      <button className="btn secondary-btn" onClick={() => carsStore.nextPage()}>Next</button>
+                    }
+                  </div>
+                ) 
+              }
             </div>
             
 
