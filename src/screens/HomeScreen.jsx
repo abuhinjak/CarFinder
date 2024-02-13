@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Link } from 'react-router-dom';
 import { carsStore } from '../stores/CarsStore';
 
+import MakeCard from '../components/MakeCard';
 import NewMakeForm from "../components/NewMakeForm";
 import ShowCase from '../components/ShowCase';
 import MainContainerButtons from '../components/MainContainerButtons';
@@ -29,28 +29,28 @@ const HomeScreen = observer(() => {
             <ShowCase />
             <MainContainerButtons createModalTrigger={createModalTrigger} view={view} onViewChange={handleView}/>
 
+            <div className="cards-container">
+              {
+                carsStore.carsData.makes.length === 0 && <h3>No cars found</h3>
+              }
+                <div className={`cards-${view}`}>
+                  {
+                    carsStore.carsData.makes.map((make) => 
+                      <MakeCard key={make.id} make={make} view={view} />)
+                  }
+                </div>
+                <div className="pagination">
+                  {
+                    carsStore.carsData.page !== 1 && <button className="btn light-btn" onClick={() => carsStore.firstPage()}>Prev</button>
+                  }
 
-
-              <ul style={{display: "flex", flexWrap: "wrap", gap:"30px"}}>
-                {carsStore.carsData.makes.map((make) => ( 
-                  <li key={make.id}>
-                    <h2>{make.name}</h2>
-                    <div>
-                      <img src={make.image} alt={make.name} width={300} height={200} style={{objectFit: "cover"}}/>
-                    </div> 
-                    <button onClick={() => carsStore.deleteMake(make.id)}>
-                        Delete
-                    </button>
-                    <button>
-                        <Link to={`/makes/${make.id}`}>GO</Link>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-              <div className="navigation">
-                <button onClick={() => carsStore.firstPage()}>First Page</button>
-                {carsStore.carsData.makes.length === carsStore.carsData.limit && <button onClick={() => carsStore.nextPage()}>Next Page</button>}
-              </div>
+                  {
+                    carsStore.carsData.makes.length === carsStore.carsData.limit && 
+                    <button className="btn secondary-btn" onClick={() => carsStore.nextPage()}>Next</button>
+                  }
+                </div>
+            </div>
+            
 
               {createModal && <NewMakeForm open={createModal} close={createModalTrigger} />}
 
