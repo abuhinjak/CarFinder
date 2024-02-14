@@ -3,7 +3,7 @@ import { carsStore } from "../stores/CarsStore"
 import { FaSortAlphaDown, FaSortAlphaUp, FaList } from "react-icons/fa";
 import { BsFillGridFill } from "react-icons/bs";
 
-const MainContainerButtons = observer(({createModalTrigger, view, onViewChange}) => {
+const MainContainerButtons = observer(({onOpenFormChange, view, onViewChange}) => {
     const orderAsc = carsStore.carsData.order === 'asc' ? 'active' : '';
     const orderDesc = carsStore.carsData.order === 'desc' ? 'active' : '';
     const grid = view === 'grid' ? 'active' : '';
@@ -11,7 +11,7 @@ const MainContainerButtons = observer(({createModalTrigger, view, onViewChange})
     
     return (
         <div className="main-container-buttons-wrapper">
-            <button className="btn delete-btn" onClick={createModalTrigger}>New Make</button>
+            <button className="btn delete-btn" onClick={onOpenFormChange}>New Make</button>
 
             <div className="buttons-wrapper">
                 <div className="sorting">

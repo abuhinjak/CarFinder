@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { carsStore } from '../stores/CarsStore'
 import { useNavigate } from 'react-router-dom'
 
-const NewMakeForm = observer(({ open, close }) => {
+const NewMakeForm = observer(({ onOpenFormChange }) => {
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -18,15 +18,21 @@ const NewMakeForm = observer(({ open, close }) => {
 
 
     return (
-        <div className={open ? 'show' : 'hide'}>
+        <div className='form-wrapper'>
             <form onSubmit={handleSubmit}>
-                <h1>New Make</h1>
-                <label htmlFor="name">Name</label>
-                <input type="text" name="name" id="name" />
-                <label htmlFor="desc">Desc</label>
-                <textarea name="desc" id="desc"></textarea>
-                <button type="submit">Create</button>
-                <button type="button" onClick={close}>Close</button>
+                <h3>Create New Make</h3>
+                <div className="form-control">
+                    <label htmlFor="name">Name: </label>
+                    <input type="text" name="name" id="name" />
+                </div>
+                <div className="form-control">
+                    <label htmlFor="desc">Description: </label>
+                    <textarea name="desc" id="desc"></textarea>
+                </div>
+                <div className="buttons-wrapper">
+                    <button className='btn delete-btn' type="submit">Create</button>
+                    <button className='btn secondary-btn' type="button" onClick={onOpenFormChange}>Close</button>
+                </div>
             </form>
         </div>
     )
