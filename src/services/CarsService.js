@@ -68,12 +68,12 @@ class CarsService {
     }
 
     // Models
-    getModels = async (id) => {
+    getModels = async (id, urlParams) => {
         const options = {
             method: "GET",
 
         }
-        const request = new Request(`${API_URL}/makes/${id}/models`, options);
+        const request = new Request(`${API_URL}/makes/${id}/models/?${urlParams}`, options);
         const response = await fetch(request);
         return response.json();
     }

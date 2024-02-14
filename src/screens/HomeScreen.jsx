@@ -11,8 +11,8 @@ import MainContainerButtons from '../components/MainContainerButtons';
 
 
 const HomeScreen = observer(() => {
-    const [openForm, setOpenForm] = useState(true);
-    const [view, setView] = useState('grid');
+    const [openForm, setOpenForm] = useState(false);
+    // const [view, setView] = useState('grid');
 
     useEffect(() => {
       carsStore.fetchCars();
@@ -22,15 +22,15 @@ const HomeScreen = observer(() => {
       setOpenForm((prevState) => !prevState);
     }
 
-    const handleView = (view) => {
-      setView(view)
-    }
+    // const handleView = (view) => {
+    //   setView(view)
+    // }
 
     return (
       <>
         <main className='container'>
             <ShowCase />
-            <MainContainerButtons onOpenFormChange={handleOpenForm} view={view} onViewChange={handleView}/>
+            <MainContainerButtons onOpenFormChange={handleOpenForm} view={carsStore.view} onViewChange={carsStore.handleView}/>
 
             {
               carsStore.status ==="loading" ? <Loader /> : (
@@ -38,10 +38,10 @@ const HomeScreen = observer(() => {
                   {
                     carsStore.carsData.makes.length === 0 && <h3>No cars found</h3>
                   }
-                    <div className={`cards-${view}`}>
+                    <div className={`cards-${carsStore.view}`}>
                       {
                         carsStore.carsData.makes.map((make) => 
-                          <MakeCard key={make.id} make={make} view={view} />)
+                          <MakeCard key={make.id} make={make} view={carsStore.view} />)
                       }
                     </div>
                   {

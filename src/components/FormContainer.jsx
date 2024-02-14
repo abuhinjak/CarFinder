@@ -10,7 +10,6 @@ const FormContainer = ({ open, children }) => {
 
   FormContainer.propTypes = {
     open: PropTypes.bool.isRequired,
-    onOpenFormChange: PropTypes.func.isRequired,
     children: PropTypes.node
   };
   

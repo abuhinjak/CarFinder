@@ -3,11 +3,11 @@ import { carsStore } from "../stores/CarsStore"
 import { FaSortAlphaDown, FaSortAlphaUp, FaList } from "react-icons/fa";
 import { BsFillGridFill } from "react-icons/bs";
 
-const MainContainerButtons = observer(({onOpenFormChange, view, onViewChange}) => {
-    const orderAsc = carsStore.carsData.order === 'asc' ? 'active' : '';
-    const orderDesc = carsStore.carsData.order === 'desc' ? 'active' : '';
-    const grid = view === 'grid' ? 'active' : '';
-    const list = view === 'list' ? 'active' : '';
+const MainContainerButtons = observer(({onOpenFormChange}) => {
+    const orderAsc = carsStore.order === 'asc' ? 'active' : '';
+    const orderDesc = carsStore.order === 'desc' ? 'active' : '';
+    const grid = carsStore.view === 'grid' ? 'active' : '';
+    const list = carsStore.view === 'list' ? 'active' : '';
     
     return (
         <div className="main-container-buttons-wrapper">
@@ -25,10 +25,10 @@ const MainContainerButtons = observer(({onOpenFormChange, view, onViewChange}) =
                 </div>
                 <div className="view">
                     <span>View: </span>
-                    <div className={`sorting-btn down ${grid}`} onClick={() => onViewChange('grid')}>
+                    <div className={`sorting-btn down ${grid}`} onClick={() => carsStore.handleView('grid')}>
                         <BsFillGridFill />
                     </div>
-                    <div className={`sorting-btn up ${list}`} onClick={() => onViewChange('list')}>
+                    <div className={`sorting-btn up ${list}`} onClick={() => carsStore.handleView('list')}>
                         <FaList />
                     </div>
                 </div>

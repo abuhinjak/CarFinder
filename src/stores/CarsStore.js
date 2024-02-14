@@ -7,23 +7,24 @@ class CarsStore {
         makes: [],
         limit: 8,
         page: 1,
-        sortBy: 'name',
-        order: 'asc'
+        // sortBy: 'name',
+        // order: 'asc'
     };
     modelsData = {
         models: [],
         limit: 8,
-        page: 1
+        page: 1,
+        // sortBy: 'name',
+        // order: 'asc'
     };
     status = "";
+    view = 'grid';
+    orderBy = 'name';
+    order = 'asc';
     modals = {
         createModal: false,
         editModal: false
     };
-
-    get isLoading() {
-        return this.status === "loading";
-    }
 
     constructor() {
         makeAutoObservable(this);
@@ -36,37 +37,6 @@ class CarsStore {
         })
     }
 
-    // // Dodajte event listener samo ako je modal otvoren
-    // if (this.modals.createModal) {
-    //     // Postavite event listener koji će zatvoriti modal kada se klikne izvan njega
-    //     document.addEventListener('click', handleClickOutsideModal);
-    // } else {
-    //     // Uklonite event listener kada je modal zatvoren
-    //     document.removeEventListener('click', handleClickOutsideModal);
-    // }
-
-    // const handleClickOutsideModal = (event) => {
-    //     const modal = document.getElementById('editForm'); // Zamijenite 'yourModalId' s ID-om vašeg moda
-    //     if (modal && !modal.contains(event.target)) {
-    //         // Klik je izvan moda, pa zatvorite modal
-    //         this.createModalTrigger();
-    //     }
-    // }
-
-    // createModalTrigger() {
-    //     if (this.modals.editModal) {
-    //         this.modals.editModal = false;
-    //     }
-    //     this.modals.createModal = !this.modals.createModal;
-    // }
-
-    // editModalTrigger() {
-    //     if(this.modals.createModal) {
-    //         this.modals.createModal = false;
-    //     }
-    //     this.modals.editModal = !this.modals.editModal;
-    // }
-
     nextPage() {
         this.carsData.page++;
         this.fetchCars();
@@ -78,8 +48,14 @@ class CarsStore {
     }
 
     sortMakes(order) {
-        this.carsData.order = order;
-        this.fetchCars();
+        this.order = order;
+        // this.fetchCars();
+    }
+
+ 
+
+    handleView(view) {
+        this.view = view;
     }
 
     *fetchCars(search) {
@@ -87,8 +63,8 @@ class CarsStore {
         const params = {
             limit: this.carsData.limit,
             page: this.carsData.page,
-            sortBy: this.carsData.sortBy,
-            order: this.carsData.order,
+            orderBy: this.orderBy,
+            order: this.order,
             search: search ? search : ''
         }
         try {
@@ -146,7 +122,10 @@ class CarsStore {
         try {
             var params = {
                 limit: this.modelsData.limit,
-                page: this.modelsData.page
+                page: this.modelsData.page,
+                orderBy: this.orderBy,
+                order: this.order,
+
             }
             const urlParams = new URLSearchParams(Object.entries(params));
             const models = yield this.carsService.getModels(id, urlParams);
