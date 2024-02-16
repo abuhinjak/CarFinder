@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { carsStore } from "../stores/CarsStore";
 import { useEffect, useState } from "react";
 
+import MakeCard from "../components/MakeCard";
 import EditMakeForm from "../components/EditMakeForm";
 import NewModelForm from "../components/NewModelForm";
 import MainContainerButtons from "../components/MainContainerButtons";
@@ -57,17 +58,25 @@ const Make = observer(() => {
 
             <MainContainerButtons onOpenFormChange={carsStore.handleView} view={carsStore.view} onViewChange={carsStore.handleView}/>
 
-            {Array.isArray(carsStore.modelsData.models) ? carsStore.modelsData.models.map((model) => (
-                <div key={model.id}>
-                    {model.name}
-                    <Link to={`/model/${model.id}`}><button>GO</button></Link>
-                    <button onClick={() => carsStore.deleteModel(makeID, model.id)}>Delete</button>
-                </div>
-            )) : (
-                <div>{carsStore.modelsData.models}</div>
-            )}
-            {editModal && <EditMakeForm open={editModalTrigger} make={make} id={makeID} />}
-            {createModal && <NewModelForm open={createModal} makeID={makeID} close={createModalTrigger} />}
+            {
+                carsStore.status === 'loading' ? <Loader /> : (
+                    <div className="cards-container">
+                        {
+                            carsStore.carsData.makes.lenght === 0 && <h3>No models found</h3>
+                        }
+                            <div className={`cards-${carsStore.view}`}>
+                                {Array.isArray(carsStore.modelsData.models) ? carsStore.modelsData.models.map((model) => (
+                                        <MakeCard key={model.id} make={model} view={carsStore.view} />
+                                    )) : (
+                                        <div>{carsStore.modelsData.models}</div>
+                                    )}
+                                    {editModal && <EditMakeForm open={editModalTrigger} make={make} id={makeID} />}
+                                    {createModal && <NewModelForm open={createModal} makeID={makeID} close={createModalTrigger} />}
+                            </div>
+
+                    </div>
+                )
+            }
 
         </main>
     );
