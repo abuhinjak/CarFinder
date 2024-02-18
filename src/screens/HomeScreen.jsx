@@ -30,7 +30,9 @@ const HomeScreen = observer(() => {
       <>
         <main className='container'>
             <ShowCase />
-            <MainContainerButtons onOpenFormChange={handleOpenForm} view={carsStore.view} onViewChange={carsStore.handleView}/>
+            <MainContainerButtons view={carsStore.view} onViewChange={carsStore.handleView}>
+              <button className="btn delete-btn" onClick={handleOpenForm}>New Make</button>
+            </MainContainerButtons>
 
             {
               carsStore.status ==="loading" ? <Loader /> : (
