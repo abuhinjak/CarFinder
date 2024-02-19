@@ -499,6 +499,21 @@ main.container {
 }
 
 
+/* 
+    _____#Model - Single_____
+*/
+
+.model-info {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.model-info img {
+    width: 30rem;
+}
+
+
 
 /* 
     _____#Footer_____

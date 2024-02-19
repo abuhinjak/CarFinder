@@ -1,10 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 
-const ModelCard = ({ view, makeId, model }) => {
+const ModelCard = ({ view, model }) => {
     const navigate = useNavigate();
 
     return (
-        <Link to={`/makes/${makeId}/models/${model.id}`} className="make-card-link">
+        <Link to={`/model/${model.id}`} className="make-card-link">
             <div className="make-card">
                 <img src={model.image} alt={model.name}/>
                 <div className="make-info-wrapper">
@@ -15,7 +15,7 @@ const ModelCard = ({ view, makeId, model }) => {
                         {
                             view === 'list' && <p>{model.desc}</p>
                         }
-                        <button onClick={() => navigate(`/makes/${makeId}/models/${model.id}`)} className='btn outline-btn'>Learn more</button>
+                        <button onClick={() => navigate(`/model/${model.id}`)} className='btn outline-btn'>Learn more</button>
                     </div>
                 </div>
             </div>
