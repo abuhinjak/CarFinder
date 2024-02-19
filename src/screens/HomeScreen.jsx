@@ -12,7 +12,6 @@ import MainContainerButtons from '../components/MainContainerButtons';
 
 const HomeScreen = observer(() => {
     const [openForm, setOpenForm] = useState(false);
-    // const [view, setView] = useState('grid');
 
     useEffect(() => {
       carsStore.fetchCars();
@@ -21,10 +20,6 @@ const HomeScreen = observer(() => {
     const handleOpenForm = () => {
       setOpenForm((prevState) => !prevState);
     }
-
-    // const handleView = (view) => {
-    //   setView(view)
-    // }
 
     return (
       <>

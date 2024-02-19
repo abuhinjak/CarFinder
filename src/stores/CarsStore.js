@@ -7,24 +7,16 @@ class CarsStore {
         makes: [],
         limit: 8,
         page: 1,
-        // sortBy: 'name',
-        // order: 'asc'
     };
     modelsData = {
         models: [],
         limit: 8,
         page: 1,
-        // sortBy: 'name',
-        // order: 'asc'
     };
     status = "";
     view = 'grid';
     orderBy = 'name';
     order = 'asc';
-    modals = {
-        createModal: false,
-        editModal: false
-    };
 
     constructor() {
         makeAutoObservable(this);
@@ -47,12 +39,14 @@ class CarsStore {
         this.fetchCars();
     }
 
-    sortMakes(order) {
+    sortMakes(order, makeID) {
         this.order = order;
-        // this.fetchCars();
+        if(makeID) {
+            this.fetchModels(makeID);
+        } else {
+            this.fetchCars();
+        }
     }
-
- 
 
     handleView(view) {
         this.view = view;

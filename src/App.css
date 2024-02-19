@@ -397,7 +397,6 @@ main.container {
 
 .cards-grid .make-card {
     position: relative;
-    max-width: 250px;
     max-height: 20rem;
     border-radius: 5px;
     transition: var(--transition-color);

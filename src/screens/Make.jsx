@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import Loader from "../components/Loader";
 import ModelCard from "../components/ModelCard";
-import EditMakeForm from "../components/EditMakeForm";
+// import EditMakeForm from "../components/EditMakeForm";
 import NewModelForm from "../components/NewModelForm";
 import MainContainerButtons from "../components/MainContainerButtons";
 import FormContainer from "../components/FormContainer";
@@ -57,7 +57,7 @@ const Make = observer(() => {
                     </div>
                 </div>
 
-                <MainContainerButtons onOpenFormChange={carsStore.handleView} view={carsStore.view} onViewChange={carsStore.handleView}>
+                <MainContainerButtons makeID={makeID} onOpenFormChange={carsStore.handleView} view={carsStore.view} onViewChange={carsStore.handleView}>
                     <button className="btn delete-btn" onClick={handleOpenForm}>Add New Model</button>
                 </MainContainerButtons>
 
@@ -65,7 +65,7 @@ const Make = observer(() => {
                     carsStore.status === 'loading' ? <Loader /> : (
                         <div className="cards-container">
                             {
-                                carsStore.carsData.makes.lenght === 0 && <h3>No models found</h3>
+                                carsStore.carsData.makes.lenght === 0 && <h3>No models found. Add new one.</h3>
                             }
                                 <div className={`cards-${carsStore.view}`}>
                                     {Array.isArray(carsStore.modelsData.models) ? carsStore.modelsData.models.map((model) => (
