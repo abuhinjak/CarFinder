@@ -118,6 +118,11 @@ a {
     color: var(--dark-clr);
 }
 
+.light-btn:hover {
+    background-color: var(--light-dark-clr);
+    color: var(--light-clr);
+}
+
 .delete-btn {
     background-color: var(--secondary-clr);
     color: #fff;

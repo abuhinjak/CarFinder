@@ -32,9 +32,12 @@ const NewMakeForm = observer(({ onOpenFormChange, make, makeId }) => {
             image: image === '' ? 'https://source.unsplash.com/random/300×300?car' : image,
             logo: logo
         }
-        if(!data.name || !data.desc ) return alert('Please fill in all fields!');
-        console.log(data)
-        carsStore.createNewMake(data);
+        if(!data.name || !data.desc ) return alert('Please enter name and description!');
+        if(makeId) {
+            carsStore.editMakeData(data, makeId);
+        } else {
+            carsStore.createNewMake(data);
+        }
         navigate('/')
         setName('');
         setDesc('');

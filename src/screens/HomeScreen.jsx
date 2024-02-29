@@ -45,7 +45,12 @@ const HomeScreen = observer(() => {
                     carsStore.status === "success" && (
                       <div className="pagination">
                         {
-                          carsStore.carsData.page !== 1 && <button className="btn light-btn" onClick={() => carsStore.firstPage()}>Prev</button>
+                          carsStore.carsData.page !== 1 && (
+                            <>
+                              <button className="btn light-btn" onClick={() => carsStore.firstPage()}>First</button>
+                              <button className="btn light-btn" onClick={() => carsStore.prevPage()}>Prev</button>
+                            </>
+                          )
                         }
 
                         {

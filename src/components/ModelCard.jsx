@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const ModelCard = ({ view, model }) => {
     const navigate = useNavigate();
@@ -22,5 +23,15 @@ const ModelCard = ({ view, model }) => {
         </Link>
     );
 };
+
+ModelCard.propTypes = {
+    view: PropTypes.string.isRequired,
+    model: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        desc: PropTypes.string
+    })
+}
 
 export default ModelCard;

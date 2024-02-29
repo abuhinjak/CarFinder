@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { observer } from "mobx-react-lite";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { carsStore } from "../stores/CarsStore";
 
 import FormContainer from "../components/FormContainer";
@@ -27,7 +27,9 @@ const ModelScreen = observer(() => {
         <>
             <main className="container">
                 <div className="make-header">
-                    <button className="btn secondary-btn" onClick={() => navigate(-1)}>Go Back</button>
+                    <Link to="#" className="btn secondary-btn" onClick={() => navigate(-1)}>
+                        Go Back
+                    </Link>
                     <h1 className="title">{model.name}</h1>
                 </div>
 

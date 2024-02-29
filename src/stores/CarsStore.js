@@ -35,6 +35,12 @@ class CarsStore {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    prevPage() {
+        this.carsData.page--;
+        this.fetchCars();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     firstPage() {
         this.carsData.page = 1;
         this.fetchCars();
