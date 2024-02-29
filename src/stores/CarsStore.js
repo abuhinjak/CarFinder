@@ -32,11 +32,17 @@ class CarsStore {
     nextPage() {
         this.carsData.page++;
         this.fetchCars();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     firstPage() {
         this.carsData.page = 1;
         this.fetchCars();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    setPage(page) {
+        this.carsData.page = page;
     }
 
     sortMakes(order, makeID) {

@@ -9,9 +9,13 @@ const MakeCard = ({ make, view }) => {
             <div className="make-card">
                 <img src={make.image} alt={make.name}/>
                 <div className="make-info-wrapper">
-                    <div className="make-logo">
-                        <img src={make.logo} alt={make.name} />
-                    </div>
+                    {
+                        make.logo && (
+                            <div className="make-logo">
+                                <img src={make.logo} alt={make.name} />
+                            </div>
+                        )
+                    }
                     <div className="make-name">
                         <h3>{make.name}</h3>
                         {

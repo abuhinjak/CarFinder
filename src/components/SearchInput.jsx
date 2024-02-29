@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { carsStore } from "../stores/CarsStore";
 
@@ -7,13 +8,17 @@ import { IoClose } from "react-icons/io5";
 
 const SearchInput = observer(() => {
     const [searchValue, setSearchValue] = useState("");
+    const navigate = useNavigate();
+
     const handleSearch = (e) => {
         setSearchValue(e.target.value);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        carsStore.setPage(1);
         carsStore.fetchCars(searchValue);
+        navigate(`/${searchValue}`);
     }
 
     const handleResetInput = () => {

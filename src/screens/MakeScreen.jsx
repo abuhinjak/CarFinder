@@ -1,44 +1,42 @@
 import { observer } from "mobx-react-lite";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { carsStore } from "../stores/CarsStore";
 import { useEffect, useState } from "react";
 
 import Loader from "../components/Loader";
 import ModelCard from "../components/ModelCard";
-// import EditMakeForm from "../components/EditMakeForm";
 import NewModelForm from "../components/NewModelForm";
+import NewMakeForm from "../components/NewMakeForm";
 import MainContainerButtons from "../components/MainContainerButtons";
 import FormContainer from "../components/FormContainer";
 
 
-const Make = observer(() => {
-    const makeID = useParams().id;
-    const make = carsStore.carsData.makes.find((make) => make.id === makeID);
-    // const [editModal, setEditModal] = useState(false);
-    // const [createModal, setCreateModal] = useState(false);
+const MakeScreen = observer(() => {
+    const navigate = useNavigate();
+    const makeId = useParams().id;
+    const make = carsStore.carsData.makes.find((make) => make.id === makeId);
     const [openForm, setOpenForm] = useState(false);
+    const [formType, setFormType] = useState('');
     const order = carsStore.order;
 
     useEffect(() => {
-        carsStore.fetchModels(makeID);
-    }, [makeID, order]);
+        carsStore.fetchModels(makeId);
+    }, [makeId, order]);
 
-    const handleOpenForm = () => {
+    const handleOpenForm = (type) => {
         setOpenForm((prevState) => !prevState);
-      }
+        setFormType(type)
+    }
 
-    // const editModalTrigger = () => {
-    //     setEditModal((prevState) => !prevState);
-    // }
-
-    // const createModalTrigger = () => {
-    //     setCreateModal((prevState) => !prevState);
-    // }
+    const handleDelete = () => {
+        if (!window.confirm(`Are you sure you want to delete ${make.name}?`)) return;
+        carsStore.deleteMake(makeId);
+        navigate('/');
+    }
 
     return (
         <>
             <main className="container">
-
                 <div className="make-header">
                     <Link to="/" className="btn secondary-btn">Go Back</Link>
                     <h1 className="title">{make.name}</h1>
@@ -51,14 +49,14 @@ const Make = observer(() => {
                     <div className="make-desc">
                         <p>{make.desc}</p>
                         <div className="buttons-wrapper">
-                            <button className="btn secondary-btn" onClick={handleOpenForm}>Edit {make.name}</button>
-                            <button className="btn delete-btn">Delete {make.name}</button>
+                            <button className="btn secondary-btn" onClick={() => handleOpenForm('edit')}>Edit {make.name}</button>
+                            <button className="btn delete-btn" onClick={handleDelete}>Delete {make.name}</button>
                         </div>
                     </div>
                 </div>
 
-                <MainContainerButtons makeID={makeID} onOpenFormChange={carsStore.handleView} view={carsStore.view} onViewChange={carsStore.handleView}>
-                    <button className="btn delete-btn" onClick={handleOpenForm}>Add New Model</button>
+                <MainContainerButtons makeID={makeId} onOpenFormChange={carsStore.handleView} view={carsStore.view} onViewChange={carsStore.handleView}>
+                    <button className="btn delete-btn" onClick={() => handleOpenForm('new')}>Add New Model</button>
                 </MainContainerButtons>
 
                 {
@@ -69,13 +67,10 @@ const Make = observer(() => {
                             }
                                 <div className={`cards-${carsStore.view}`}>
                                     {Array.isArray(carsStore.modelsData.models) ? carsStore.modelsData.models.map((model) => (
-                                            <ModelCard key={model.id} model={model} makeId={makeID} view={carsStore.view} />
+                                            <ModelCard key={model.id} model={model} makeId={makeId} view={carsStore.view} />
                                         )) : (
                                             <div>{carsStore.modelsData.models}</div>
                                         )}
-                                        {/* {editModal && <EditMakeForm open={editModalTrigger} make={make} id={makeID} />}
-                                        {createModal && <NewModelForm open={createModal} makeID={makeID} close={createModalTrigger} />} */}
-
                                 </div>
 
                         </div>
@@ -84,11 +79,17 @@ const Make = observer(() => {
             </main>
             {openForm && (
                 <FormContainer open={openForm}>
-                    <NewModelForm  onOpenFormChange={handleOpenForm} />
+                    {
+                        formType !== 'edit' ? (
+                            <NewModelForm  onOpenFormChange={handleOpenForm} makeId={makeId} /> 
+                        ) : (
+                            <NewMakeForm  onOpenFormChange={handleOpenForm} make={make} makeId={makeId} />
+                        )
+                    }
                 </FormContainer>
             )}
         </>
     );
 });
 
-export default Make;
+export default MakeScreen;

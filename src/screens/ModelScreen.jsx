@@ -6,7 +6,7 @@ import { carsStore } from "../stores/CarsStore";
 import FormContainer from "../components/FormContainer";
 import NewModelForm from "../components/NewModelForm";
 
-const Model = observer(() => {
+const ModelScreen = observer(() => {
     const modelId = useParams().id;
     const model = carsStore.modelsData.models.find((model) => model.id === modelId);
     const [openForm, setOpenForm] = useState(false);
@@ -14,6 +14,12 @@ const Model = observer(() => {
 
     const handleOpenForm = () => {
         setOpenForm((prevState) => !prevState);
+    }
+
+    const handleDelete = () => {
+        if (!window.confirm(`Are you sure you want to delete ${model.name}?`)) return;
+        carsStore.deleteModel(model.makeId, modelId);
+        navigate(-1);
     }
     
 
@@ -33,7 +39,7 @@ const Model = observer(() => {
                         <p>{model.desc}</p>
                         <div className="buttons-wrapper">
                             <button className="btn secondary-btn" onClick={handleOpenForm}>Edit {model.name}</button>
-                            <button className="btn delete-btn">Delete {model.name}</button>
+                            <button onClick={handleDelete} className="btn delete-btn">Delete {model.name}</button>
                         </div>
                     </div>
                 </div>
@@ -47,4 +53,4 @@ const Model = observer(() => {
     );
 });
 
-export default Model;
+export default ModelScreen;

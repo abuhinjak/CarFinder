@@ -1,10 +1,8 @@
 import { observer } from 'mobx-react-lite'
 import { carsStore } from '../stores/CarsStore'
-import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 
-const NewModelForm = observer(({ onOpenFormChange, model, modelId }) => {
-    const navigate = useNavigate();
+const NewModelForm = observer(({ onOpenFormChange, model, makeId }) => {
 
     const [name, setName] = useState(model ? model.name : '');
     const [desc, setDesc] = useState(model ? model.desc : '');
@@ -28,8 +26,8 @@ const NewModelForm = observer(({ onOpenFormChange, model, modelId }) => {
             desc: desc,
             image: image === '' ? 'https://source.unsplash.com/random/300×300?car' : image
         }
-        carsStore.createNewMake(data);
-        navigate('/')
+        carsStore.createNewModel(data, model.makeId);
+        console.log(data, model.makeId);
         setName('');
         setDesc('');
         setImage('');
@@ -41,10 +39,10 @@ const NewModelForm = observer(({ onOpenFormChange, model, modelId }) => {
         <div className='form-wrapper'>
             <form onSubmit={handleSubmit}>
                 {
-                    modelId ? (
-                        <h2>Edit {model.name}</h2>
-                    ) : (
+                    makeId ? (
                         <h2>Add New Model</h2>
+                        ) : (
+                        <h2>Edit {model.name}</h2>
                     )
                 }
                 <div className="form-control">
@@ -60,8 +58,8 @@ const NewModelForm = observer(({ onOpenFormChange, model, modelId }) => {
                     <textarea name="desc" id="desc" value={desc} onChange={handleInputChange}></textarea>
                 </div>
                 <div className="buttons-wrapper">
-                    <button disabled={true} className='btn delete-btn' type="submit">
-                        {modelId ? 'Save' : 'Add'}
+                    <button className='btn delete-btn' type="submit">
+                        {makeId ? 'Save' : 'Add'}
                     </button>
                     <button className='btn secondary-btn' type="button" onClick={onOpenFormChange}>Close</button>
                 </div>

@@ -1,15 +1,15 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { carsStore } from '../stores/CarsStore'
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react';
 
-const NewMakeForm = observer(({ onOpenFormChange }) => {
+const NewMakeForm = observer(({ onOpenFormChange, make, makeId }) => {
     const navigate = useNavigate();
 
-    const [name, setName] = useState('');
-    const [desc, setDesc] = useState('');
-    const [logo, setLogo] = useState('');
-    const [image, setImage] = useState('');
+    const [name, setName] = useState(make ? make.name : '');
+    const [desc, setDesc] = useState(make ? make.desc : '');
+    const [logo, setLogo] = useState(make ? make.logo : '');
+    const [image, setImage] = useState(make ? make.image : '');
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -30,8 +30,10 @@ const NewMakeForm = observer(({ onOpenFormChange }) => {
             name: name,
             desc: desc,
             image: image === '' ? 'https://source.unsplash.com/random/300×300?car' : image,
-            logo: logo === '' ? 'https://source.unsplash.com/random/100×100?brand' : logo 
+            logo: logo
         }
+        if(!data.name || !data.desc ) return alert('Please fill in all fields!');
+        console.log(data)
         carsStore.createNewMake(data);
         navigate('/')
         setName('');
@@ -45,7 +47,13 @@ const NewMakeForm = observer(({ onOpenFormChange }) => {
     return (
         <div className='form-wrapper'>
             <form onSubmit={handleSubmit}>
-                <h3>Create New Make</h3>
+                {
+                    makeId ? (
+                        <h2>Edit {make.name}</h2>
+                    ) : (
+                        <h2>Add New Make</h2>
+                    )
+                }
                 <div className="form-control">
                     <label htmlFor="name">Name: </label>
                     <input type="text" name="name" id="name" value={name} onChange={handleInputChange} />
@@ -63,7 +71,9 @@ const NewMakeForm = observer(({ onOpenFormChange }) => {
                     <textarea name="desc" id="desc" value={desc} onChange={handleInputChange}></textarea>
                 </div>
                 <div className="buttons-wrapper">
-                    <button disabled={true} className='btn delete-btn' type="submit">Create</button>
+                    <button className='btn delete-btn' type="submit">
+                        {makeId ? 'Save' : 'Add'}
+                    </button>
                     <button className='btn secondary-btn' type="button" onClick={onOpenFormChange}>Close</button>
                 </div>
             </form>

@@ -53,6 +53,12 @@ a {
     margin: 0 auto;
 }
 
+@media (max-width: 1280px) {
+    .container {
+        padding: 0 1rem;
+    }
+}
+
 .color-primary {
     color: var(--primary-clr);
 }
@@ -390,7 +396,7 @@ main.container {
 
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 0fr));
     gap: 2rem;
     margin-bottom: 2rem;
 }

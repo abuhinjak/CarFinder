@@ -61,7 +61,7 @@ const HomeScreen = observer(() => {
         </main>
         {openForm && (
           <FormContainer open={openForm}>
-            <NewMakeForm  onOpenFormChange={handleOpenForm} />
+            <NewMakeForm onOpenFormChange={handleOpenForm} />
           </FormContainer>
         )}
       </>
